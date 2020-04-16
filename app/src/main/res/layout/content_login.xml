@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="loginViewModel"
+            type="com.mica.media.tech.foodie.logins.LoginViewModel" />
+        <variable
+            name="model"
+            type="com.mica.media.tech.foodie.logins.LoginModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".logins.LoginsActivity"
+        tools:showIn="@layout/activity_login"
+        android:layout_margin="@dimen/_16sdp">
+
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_margin="@dimen/_16sdp"
+            android:visibility="invisible"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_logo"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/logins"
+            android:gravity="center"
+            android:textStyle="normal"
+            android:textSize="@dimen/_20sdp"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            android:id="@+id/lbl_userId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_64sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_below="@+id/img_logo"
+            android:drawablePadding="@dimen/_4sdp"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_10sdp"
+            android:hint="@string/user_id"
+            android:inputType="textEmailAddress"
+            android:layout_centerInParent="true"
+            android:text="@={loginViewModel.model.userName}"
+            android:textSize="@dimen/_12sdp"
+            app:error="@{loginViewModel.model.userNameError}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/lbl_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lbl_userId"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:inputType="textPassword"
+            android:drawablePadding="@dimen/_8sdp"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_10sdp"
+            android:hint="@string/password"
+            android:maxLength="8"
+            android:textSize="@dimen/_12sdp"
+            android:text="@={loginViewModel.model.password}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:error="@{loginViewModel.model.passwordError}"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/lblcreateaccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up"
+            android:gravity="center"
+            android:onClick="@{v->loginViewModel.onSignUpClicked(v)}"
+
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:textSize="@dimen/_10sdp"
+            android:layout_margin="@dimen/_8sdp" />
+
+
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/lbl_password"
+            android:layout_alignEnd="@+id/lbl_password"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/lblcreateaccount"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:gravity="center"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:visibility="@{loginViewModel.isProgress?View.GONE:View.VISIBLE}"
+            android:onClick="@{v->loginViewModel.onLoginClicked(v,loginViewModel.model)}"
+            android:text="Login"
+            android:layout_alignLeft="@+id/lbl_password"
+            android:layout_alignRight="@+id/lbl_password" />
+
+        <ProgressBar
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_alignStart="@+id/lbl_password"
+            android:layout_alignEnd="@+id/lbl_password"
+            android:layout_above="@+id/lblcreateaccount"
+            android:layout_centerHorizontal="true"
+            android:visibility="@{loginViewModel.isProgress?View.VISIBLE:View.GONE}"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:layout_alignLeft="@+id/lbl_password"
+            android:layout_alignRight="@+id/lbl_password" />
+    </RelativeLayout>
+</layout>
+
+
+
